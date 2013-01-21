@@ -1,10 +1,10 @@
-/*
+/**
  * Copyright (c) 2013 Anton Fagerberg.
- * www.antonfagerberg.com | anton [a-t] antonfagerberg [d-o-t] com.
+ * anton@antonfagerberg.com | www.antonfagerberg.com
  */
 import org.lwjgl.opengl.{GL11, DisplayMode, Display}
 
-abstract class Game(width: Int, height: Int, title: String = "Brainbow! Braaaiinnnbows...") {
+abstract class Game(width: Int, height: Int, title: String = "Brainbow! Braaaiinnnbows...", left: Int = -1, right: Int = 1, bottom: Int = -1, top: Int = 1) {
   private var nextRender = System.currentTimeMillis()
 
   Display.setTitle(title)
@@ -13,7 +13,7 @@ abstract class Game(width: Int, height: Int, title: String = "Brainbow! Braaaiin
 
   GL11.glMatrixMode(GL11.GL_PROJECTION)
   GL11.glLoadIdentity()
-  GL11.glOrtho(-1, 1, -1, 1, -1, 1)
+  GL11.glOrtho(left, right, bottom, top, -1, 1)
   GL11.glMatrixMode(GL11.GL_MODELVIEW)
   GL11.glLoadIdentity()
   GL11.glDisable(GL11.GL_DEPTH_TEST)
@@ -30,6 +30,7 @@ abstract class Game(width: Int, height: Int, title: String = "Brainbow! Braaaiin
         nextRender = System.currentTimeMillis() + 10
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT)
         update()
+        render()
         Display.update()
       } else {
         Thread.sleep(nextRender - System.currentTimeMillis())
@@ -40,4 +41,5 @@ abstract class Game(width: Int, height: Int, title: String = "Brainbow! Braaaiin
   }
 
   def update()
+  def render()
 }

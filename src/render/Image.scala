@@ -1,6 +1,6 @@
-/*
+/**
  * Copyright (c) 2013 Anton Fagerberg.
- * www.antonfagerberg.com | anton [a-t] antonfagerberg [d-o-t] com.
+ * anton@antonfagerberg.com | www.antonfagerberg.com
  */
 package render
 

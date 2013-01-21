@@ -2,25 +2,23 @@
  * Copyright (c) 2013 Anton Fagerberg.
  * anton@antonfagerberg.com | www.antonfagerberg.com
  */
-
 import org.lwjgl.input.Keyboard
 import render.Image
+import spm.Player
 
-object Main extends Game(1440, 900) {
-  val image = new Image("gfx/alien.png", 0.1f, 0.2f)
+object Main extends Game(1440, 900, "Brainbow, bithces!", 0, 32, 0, 20) {
+  private val background = new Image("/Users/anton/Dropbox/SPM/Bilder/grid_no_scale.png", 32f, 20f)
+  private val player = new Player
+
   run()
 
-  var positionX = 0f
-  var positionY = 0f
-
   def update() {
-    if (Keyboard.isKeyDown(Keyboard.KEY_LEFT)) positionX -= 0.01f
-    else if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) positionX += 0.01f
+    player.update()
+  }
 
-    if (Keyboard.isKeyDown(Keyboard.KEY_UP)) positionY += 0.01f
-    else if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) positionY -= 0.01f
-
-    image.renderCentered(positionX, positionY)
+  def render() {
+    background.renderCentered(16f, 10f)
+    player.renderCentered(0f, 0f)
   }
 
   def main(args: Array[String]) {}

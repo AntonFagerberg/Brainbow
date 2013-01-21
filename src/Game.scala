@@ -18,6 +18,8 @@ abstract class Game(width: Int, height: Int, title: String = "Brainbow! Braaaiin
   GL11.glLoadIdentity()
   GL11.glDisable(GL11.GL_DEPTH_TEST)
   GL11.glEnable(GL11.GL_TEXTURE_2D)
+  GL11.glEnable(GL11.GL_BLEND)
+  GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
 
   /** Main loop of the game engine.
     * (Do not override).
@@ -25,7 +27,7 @@ abstract class Game(width: Int, height: Int, title: String = "Brainbow! Braaaiin
   def run() {
     while (!Display.isCloseRequested) {
       if (nextRender <= System.currentTimeMillis()) {
-        nextRender = System.currentTimeMillis() + 20
+        nextRender = System.currentTimeMillis() + 10
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT)
         update()
         Display.update()
